@@ -1,5 +1,26 @@
 {
+  "name": "recette-api",
+  "version": "1.0.0",
+  "description": "Recepies API based on TheMealDB",
+  "homepage": "https://github.com/octerry/recette-api#readme",
+  "bugs": {
+    "url": "https://github.com/octerry/recette-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/octerry/recette-api.git"
+  },
+  "license": "ISC",
+  "author": "Octerry",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
   "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.10",
     "express": "^5.3.0"
   }
 }
