@@ -19,6 +19,5 @@ app.get('/health', async (req, res) => { // Avoir les infos de l'API
 })
 
 app.use('/api/meals', mealRoutes)
-// app.use('/api/personnage', personnageRoute)
 
 export default app;

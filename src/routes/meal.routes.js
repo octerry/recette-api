@@ -1,22 +1,10 @@
 import { Router } from "express";
-import { fetchMeals } from "../services/meal-db.service.js";
+import { fetchBy } from "../services/meal-db.service.js";
 
 const router = Router();
 
 router.get('/', async (req, res) => {
-    let finalResponse = await fetchMeals();
-
-    // if (req.query.espece) {
-    //     finalResponse = finalResponse.filter((item) => item.espece === req.query.espece)
-    // }
-
-    // if (req.query.statut) {
-    //     finalResponse = finalResponse.filter((item) => item.statut === req.query.statut)
-    // }
-
-    // if (req.query.nom) {
-    //     finalResponse = finalResponse.filter((item) => item.nom.toLowerCase().includes(req.query.nom.toLocaleLowerCase()))
-    // }
+    let finalResponse = await fetchBy("random");
 
     res.json(finalResponse)
 })
