@@ -17,7 +17,6 @@ function clean (item) {
         if (key.includes("strMeasure")) ingredients[key.replace("strMeasure", "")-1].quantite = emptylessItem[key]
     });
 
-
     return {
         id: emptylessItem.idMeal,
         nom: emptylessItem.strMeal,
@@ -37,8 +36,15 @@ export async function fetchBy (type, input=null) {
     if (type === "id") url += "/lookup.php?i=" + input
     if (type === "char") url += "/search.php?f=" + input
 
+    if (url === BASE) return;
+
+    console.log(input)
+
     const apiFetch = await fetch(url)
-    const data = await apiFetch.json()
+    const data = await apiFetch.json();
+
+    // Si la réponse est négative (JE DETESTE THEMEALDB)
+    if (!apiFetch.ok || ['{"meals":"no data found"}', '{"meals":null}'].includes(JSON.stringify(data))) return null
 
     return data.meals.map(clean)
 }

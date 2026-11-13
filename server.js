@@ -2,7 +2,7 @@ import app from './src/app.js';
 import * as dotenv from 'dotenv';
 
 // Utilise le .env à la place des variables environements
-dotenv.config() 
+dotenv.config()
 
 // Va chercher la variable PORT dans le .env
 const PORT = process.env.PORT || 3000;
