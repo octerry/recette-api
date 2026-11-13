@@ -1,23 +1,28 @@
 import { Router } from "express";
-import { fetchBy } from "../services/meal-db.service.js";
+import { fetchBy, getAll } from "../services/meal-db.service.js";
 
 const router = Router();
 
 router.get('/', async (req, res) => {
-    let finalResponse = await fetchBy("char","a");
+    const currentUrl = await req.protocol + '://' + req.get('host') + req.originalUrl;
+    
+    let finalResponse = await getAll(currentUrl);
 
-    // if (req.query.char) {
-    //     finalResponse = await fetchBy("char",req.query.char);
-    // }
-    // if (req.query.random) {
-    //     finalResponse = await fetchBy("random");
-    // }
-
+    // id primaire : 52802
+    if (req.query.char) {
+        finalResponse = await fetchBy("char",req.query.char);
+    }
+    if (typeof(req.query.random) === "string") {
+        finalResponse = await fetchBy("random");
+    }
+    
     res.json(finalResponse)
 })
 
-router.get('/:letter', async (req, res) => {
-    const item = await fetchBy("char", req.params.letter); // 52802
+router.get('/:page', async (req, res) => {
+    const currentUrl = await req.protocol + '://' + req.get('host') + req.originalUrl;
+    
+    const item = await getAll(currentUrl, Number(req.params.page));
     if (item === null) res.status(404).json({erreur: "Identifiant introuvable"})
     else {
         res.json(item)

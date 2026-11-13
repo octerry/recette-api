@@ -11,11 +11,11 @@ app.listen(PORT, () => { // OUAIS CA MARCHE
     console.log('Serveur lancé sur http://localhost:' + PORT);
 })
 
-app.use((req, res) => { // Ah j'ai mal écrit
+app.use((req, res) => { // "Ah j'ai mal écrit"
     res.status(404).json({erreur: "Route inconnue"})
 })
 
-app.use((err, req, res, next) => { // Huh ? C'est pas moi le problème ?
+app.use((err, req, res, next) => { // "Huh ? C'est pas moi le problème ?"
     console.log(err)
     res.status(500).json({erreur: "Erreur serveur"})
 })
