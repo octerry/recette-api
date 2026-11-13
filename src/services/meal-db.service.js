@@ -65,6 +65,8 @@ function clean (item) {
 }
 
 export async function getAll (url, page=0) {
+    if (url === '*') return all;
+
     // Traitement de l'URL
     let newUrl = url
 

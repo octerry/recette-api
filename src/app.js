@@ -2,6 +2,7 @@ import express, { json } from 'express';
 import cors from 'cors';
 import mealRoutes from './routes/meal.routes.js'
 import singleMealRoutes from './routes/singlemeal.routes.js'
+import statsRoutes from './routes/stats.routes.js'
 
 const app = express();
 app.use(cors())
@@ -21,5 +22,6 @@ app.get('/health', async (req, res) => { // Avoir les infos de l'API
 
 app.use('/api/meals', mealRoutes) // HAHA on dirait Happy Meals
 app.use('/api/singlemeal', singleMealRoutes)
+app.use('/api/stats', statsRoutes)
 
 export default app;
