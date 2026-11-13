@@ -7,18 +7,7 @@ router.get('/', async (req, res) => {
     const currentUrl = await req.protocol + '://' + req.get('host') + req.originalUrl;
     let finalResponse = await getAll(currentUrl);
 
-    // id primaire : 52802
-    if (req.query.char) {
-        finalResponse = await getBy("char",req.query.char);
-    }
-    if (req.query.category) {
-        finalResponse = await getBy("category",req.query.category);
-    }
-    if (req.query.country) {
-        finalResponse = await getBy("country",req.query.country);
-    }
-    
-    if (finalResponse === null) res.status(404).json({erreur: "Identifiant introuvable"})
+    if (finalResponse === null) res.status(404).json({erreur: "Recette introuvable"})
     
     res.json(finalResponse)
 })

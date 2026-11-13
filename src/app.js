@@ -1,4 +1,7 @@
-import express, { json } from 'express';
+import express from 'express';
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { readFileSync } from 'node:fs';
 import cors from 'cors';
 import mealRoutes from './routes/meal.routes.js'
 import singleMealRoutes from './routes/singlemeal.routes.js'
@@ -12,8 +15,8 @@ app.get('/', (req, res) => { // Pour check si l'URL fonctionne
 })
 
 app.get('/health', async (req, res) => { // Avoir les infos de l'API
-    const jsonFetch = await fetch("./package.json")
-    const data = await jsonFetch.json()
+    const __dirname = dirname(fileURLToPath(import.meta.url)) // Position du fichier
+    const data = JSON.parse( readFileSync(join(__dirname, '..', 'package.json'), 'utf8') ) // Récupère et "traduit" le JSON
     
     res.json({
         version : data ? data.version : "1.0,0"
