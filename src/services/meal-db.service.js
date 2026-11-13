@@ -25,8 +25,6 @@ async function fetchAll() {
             sortAll()
         }
     });
-
-    console.log('AAAAA')
 }
 
 async function sortAll() {
@@ -81,7 +79,7 @@ export async function getAll (url, page=0) {
     const pageTaille = Math.ceil(all.length / ( N_PAGES + 1 ));
 
     const data = {
-        info: {
+        infos: {
             count: all.length,
             pages: N_PAGES,
             next: nextLocation,
@@ -93,8 +91,27 @@ export async function getAll (url, page=0) {
     return data;
 }
 
-export async function fetchItemBy(type, input=null) {
-    const data = await fetchBy(type, input)
+export async function getBy(type, input=null) {
+    let finalData = all
+
+    if (type === "char") {
+        if (input.length === 1) {
+            finalData.filter(item => item.nom[0] === char)
+        } else finalData = []
+    }
+}
+
+export async function getItemBy(type=null, input=null) {
+    const data = all
+
+    // if (type === "random") {
+    //     const id = Math.floor(Math.random() * all.length)
+    //     data = all[id];
+    // }
+    // if (type === "name") {
+    //     const id = all.find(item => item.name == input)
+    //     data = all[id];
+    // }
 
     return data ? data[0] : null;
 }

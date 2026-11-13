@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { fetchBy, getAll } from "../services/meal-db.service.js";
+import { getAll } from "../services/meal-db.service.js";
 
 const router = Router();
 
@@ -9,12 +9,12 @@ router.get('/', async (req, res) => {
     let finalResponse = await getAll(currentUrl);
 
     // id primaire : 52802
-    if (req.query.char) {
-        finalResponse = await fetchBy("char",req.query.char);
-    }
-    if (typeof(req.query.random) === "string") {
-        finalResponse = await fetchBy("random");
-    }
+    // if (req.query.char) {
+    //     finalResponse = await getBy("char",req.query.char);
+    // }
+    // if (typeof(req.query.random) === "string") {
+    //     finalResponse = await fetchBy("random");
+    // }
     
     res.json(finalResponse)
 })

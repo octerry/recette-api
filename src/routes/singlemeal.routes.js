@@ -1,19 +1,19 @@
 import { Router } from "express";
-import { fetchItemBy } from "../services/meal-db.service.js";
+import { getAll, getItemBy } from "../services/meal-db.service.js";
 
 const router = Router();
 
 router.get('/', async (req, res) => {
-    let finalResponse = await fetchItemBy("char","a");
+    let finalResponse = await getItemBy();
 
     if (req.query.name) {
-        finalResponse = await fetchItemBy("name",req.query.name);
+        finalResponse = await getItemBy("name",req.query.name);
     }
     if (req.query.char) {
-        finalResponse = await fetchItemBy("char",req.query.char);
+        finalResponse = await getItemBy("char",req.query.char);
     }
     if (typeof(req.query.random) === "string") {
-        finalResponse = await fetchItemBy("random");
+        finalResponse = await getItemBy("random");
     }
 
     if (finalResponse === null) res.status(404).json({erreur: "Plat introuvable"})
