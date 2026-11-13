@@ -9,9 +9,6 @@ router.get('/', async (req, res) => {
     if (req.query.name) {
         finalResponse = await getItemBy("name",req.query.name);
     }
-    if (req.query.char) {
-        finalResponse = await getItemBy("char",req.query.char);
-    }
     if (typeof(req.query.random) === "string") {
         finalResponse = await getItemBy("random");
     }

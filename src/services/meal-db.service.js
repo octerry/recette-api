@@ -96,22 +96,33 @@ export async function getBy(type, input=null) {
 
     if (type === "char") {
         if (input.length === 1) {
-            finalData.filter(item => item.nom[0] === char)
+            finalData = finalData.filter(item => item.nom[0].toLowerCase() === input.toLowerCase())
         } else finalData = []
     }
+    // if (type === "category") {
+    //     if (input.length === 1) {
+    //         finalData.filter(item => item.nom[0] === input)
+    //     } else finalData = []
+    // }
+    // if (type === "country") {
+    //     if (input.length === 1) {
+    //         finalData.filter(item => item.nom[0] === input)
+    //     } else finalData = []
+    // }
+
+    return finalData;
 }
 
 export async function getItemBy(type=null, input=null) {
-    const data = all
+    let data = all[0]
 
-    // if (type === "random") {
-    //     const id = Math.floor(Math.random() * all.length)
-    //     data = all[id];
-    // }
-    // if (type === "name") {
-    //     const id = all.find(item => item.name == input)
-    //     data = all[id];
-    // }
+    if (type === "random") {
+        const id = Math.floor(Math.random() * (all.length - 1))
+        data = all[id];
+    }
+    if (type === "name") {
+        data = all.find((item) => item.nom === input)
+    }
 
-    return data ? data[0] : null;
+    return data ? data : null; // Au cas où c'est undefined
 }
