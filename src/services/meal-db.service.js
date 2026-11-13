@@ -97,18 +97,14 @@ export async function getBy(type, input=null) {
     if (type === "char") {
         if (input.length === 1) {
             finalData = finalData.filter(item => item.nom[0].toLowerCase() === input.toLowerCase())
-        } else finalData = []
+        } else finalData = null
     }
-    // if (type === "category") {
-    //     if (input.length === 1) {
-    //         finalData.filter(item => item.nom[0] === input)
-    //     } else finalData = []
-    // }
-    // if (type === "country") {
-    //     if (input.length === 1) {
-    //         finalData.filter(item => item.nom[0] === input)
-    //     } else finalData = []
-    // }
+    if (type === "category") {
+        finalData = finalData.filter(item => item.categorie.includes(input))
+    }
+    if (type === "country") {
+        finalData = finalData.filter(item => item.pays === input)
+    }
 
     return finalData;
 }
