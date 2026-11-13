@@ -4,10 +4,9 @@ import { getAll, getBy } from "../services/meal-db.service.js";
 const router = Router();
 
 router.get('/', async (req, res) => {
-    const currentUrl = await req.protocol + '://' + req.get('host') + req.originalUrl;
+    const currentUrl = await req.protocol + '://' + req.get('host') + req.originalUrl; // URL actuel
     let finalResponse = await getAll(currentUrl);
 
-    // id primaire : 52802
     if (req.query.char) {
         finalResponse = await getBy("char",req.query.char);
     }

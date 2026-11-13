@@ -6,6 +6,10 @@ const router = Router();
 router.get('/', async (req, res) => {
     let finalResponse = await getItemBy();
 
+    // id primaire : 52802
+    if (req.query.id) {
+        finalResponse = await getItemBy("id",req.query.id);
+    }
     if (req.query.name) {
         finalResponse = await getItemBy("name",req.query.name);
     }

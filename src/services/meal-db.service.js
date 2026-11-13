@@ -102,10 +102,10 @@ export async function getBy(type, input=null) {
         } else finalData = null
     }
     if (type === "category") {
-        finalData = finalData.filter(item => item.categorie.includes(input))
+        finalData = finalData.filter(item => item.categorie.toLowerCase().includes(input.toLowerCase()))
     }
     if (type === "country") {
-        finalData = finalData.filter(item => item.pays === input)
+        finalData = finalData.filter(item => item.pays.toLowerCase() === input.toLowerCase())
     }
 
     return finalData;
@@ -118,8 +118,11 @@ export async function getItemBy(type=null, input=null) {
         const id = Math.floor(Math.random() * (all.length - 1))
         data = all[id];
     }
+    if (type === "id") {
+        data = all.find((item) => item.id === input)
+    }
     if (type === "name") {
-        data = all.find((item) => item.nom === input)
+        data = all.find((item) => item.nom.toLowerCase() === input.toLowerCase())
     }
 
     return data ? data : null; // Au cas où c'est undefined
